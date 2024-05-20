@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const usuario_1 = __importDefault(require("../routes/usuario"));
 const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("../db/connection"));
+const client_soap_transunion_1 = require("../clients/client.soap.transunion");
 class Server {
     constructor() {
         var _a;
@@ -27,6 +28,7 @@ class Server {
         this.dbConnection(); // Inicializamos la conexión a la base de datos
         this.middlewares(); // Inicializamos los middlewares
         this.routes(); // Inicializamos los métodos, definimos rutas
+        this.soap();
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,6 +51,9 @@ class Server {
     }
     listen() {
         this.app.listen(this.port, () => console.log(`Server running on port ${this.port} !!`));
+    }
+    soap() {
+        (0, client_soap_transunion_1.clientTransunion)(); // Remove this line
     }
 }
 exports.default = Server;
